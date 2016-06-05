@@ -1,0 +1,39 @@
+<div class="posts-example" ng-controller="PostsController" ng-init="actionType='Create'">
+  <h3 class="modal-title">{{actionType}} a Post</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <form name="postForm" novalidate class="form-horizontal">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="controls">
+                <div class="row">
+                  <div class="col-md-12">
+                    <input required id="name" type="text" name="name" placeholder="Post" ng-model="post.name" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="controls">
+                <div class="row">
+                  <div class="col-md-12">
+                    <textarea required rows="10" class="form-control" name="description" placeholder="Enter post description" ng-model="post.description" class="form-control"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-primary pull-right" ng-click="addPost(post)" ng-disabled="postForm.$invalid">{{actionType}}</button>
+      </div>
+      </div>
+    </div>
+  </div>
