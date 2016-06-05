@@ -1,9 +1,9 @@
 (function() {
     'use strict';
 
-    function Posts($http, $q) {
+    function PostCircle($http, $q) {
         return {
-            name: 'posts',
+            name: 'postCircle',
             checkCircle: function(circle) {
                 var deferred = $q.defer();
 
@@ -17,11 +17,22 @@
             }
         };
     }
+    function Posts($resource) {
+        return $resource('/api/posts:postId', {
+          goalId: '@_id'
+        }, {
+          update: {
+            method: 'PUT'
+          }
+        });
+    }
 
     angular
         .module('mean.posts')
+        .factory('PostCircle', PostCircle)
         .factory('Posts', Posts);
 
-    Posts.$inject = ['$http', '$q'];
+    Posts.$inject = ['$resource'];
+    PostCircle.$inject = ['$http', '$q'];
 
 })();

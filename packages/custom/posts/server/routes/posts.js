@@ -3,11 +3,14 @@
 
     /* jshint -W098 */
     // The Package is past automatically as first parameter
+    var posts = require('../controllers/posts');
+
     module.exports = function(Posts, app, auth, database, circles) {
 
         var requiresAdmin = circles.controller.hasCircle('admin');
         var requiresLogin = circles.controller.hasCircle('authenticated');
-
+        app.get('/api/posts', posts.all);
+        app.post('/api/posts', posts.createPost);
         app.get('/api/posts/example/anyone', function(req, res) {
             res.send('Anyone can access this');
         });

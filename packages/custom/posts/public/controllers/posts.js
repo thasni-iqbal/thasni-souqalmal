@@ -3,14 +3,14 @@
 
     /* jshint -W098 */
 
-    function PostsController($scope, Global, Posts, $stateParams) {
+    function PostsController($scope, Global, Posts,PostCircle, $stateParams) {
         $scope.global = Global;
         $scope.package = {
-            name: 'posts'
+            name: 'posts',
         };
-
+        $scope.posts = Posts.query()
         $scope.checkCircle = function(role) {
-            Posts.checkCircle(role).then(function(response) {
+            PostCircle.checkCircle(role).then(function(response) {
                 $scope.res = response;
                 $scope.resStatus = true;
             }, function(error) {
@@ -18,12 +18,24 @@
                 $scope.resStatus = false;
             });
         };
+        $scope.addPost = function(post){
+            createPost(post);
+        };
+        function createPost(post){
+            var postService = new Posts({
+                        name: post.name,
+                        description: post.description,
+            });
+            postService.$save(function (response) {
+                $scope.posts.push(response);
+            });
+        }
     }
 
     angular
         .module('mean.posts')
         .controller('PostsController', PostsController);
 
-    PostsController.$inject = ['$scope', 'Global', 'Posts', '$stateParams'];
+    PostsController.$inject = ['$scope', 'Global', 'Posts','PostCircle', '$stateParams'];
 
 })();

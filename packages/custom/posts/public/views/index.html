@@ -1,4 +1,13 @@
 <div class="posts-example" ng-controller="PostsController" ng-init="checkCircle('auth')">
   <h1>Latest Posts</h1>
-  <div ng-show="resStatus"><a ui-sref="post-create">Create New Posts</a></div>
+  <a ui-sref="post-create" ng-show="resStatus" class="btn btn-primary pull-right">+ Create New Posts</a>
+  <ul>
+  <div ng-repeat="post in posts" class="row">
+  <div class="col-md-12">
+  <h3>{{post.name}}</h3>
+  {{post.description}}
+  <h5>created on:{{post.created|date}}
+  </div>
+  </div>
+  </ul>
 </div>
