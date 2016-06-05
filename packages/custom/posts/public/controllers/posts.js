@@ -3,12 +3,12 @@
 
     /* jshint -W098 */
 
-    function PostsController($scope, Global, Posts,PostCircle, $stateParams) {
+    function PostsController($scope, Global, Posts,PostCircle, $stateParams, $location) {
         $scope.global = Global;
         $scope.package = {
             name: 'posts',
         };
-        $scope.posts = Posts.query()
+        $scope.posts = Posts.query();
         $scope.checkCircle = function(role) {
             PostCircle.checkCircle(role).then(function(response) {
                 $scope.res = response;
@@ -29,6 +29,8 @@
             postService.$save(function (response) {
                 $scope.posts.push(response);
             });
+            $location.path( "/posts/list" );
+
         }
     }
 
@@ -36,6 +38,6 @@
         .module('mean.posts')
         .controller('PostsController', PostsController);
 
-    PostsController.$inject = ['$scope', 'Global', 'Posts','PostCircle', '$stateParams'];
+    PostsController.$inject = ['$scope', 'Global', 'Posts','PostCircle', '$stateParams', '$location'];
 
 })();

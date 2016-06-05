@@ -3,7 +3,7 @@
 
     function Posts($stateProvider) {
         $stateProvider.state('post-list', {
-            url: '/posts/example',
+            url: '/posts/list',
             templateUrl: 'posts/views/index.html'
         }).state('post-create', {
             url: '/posts/create',
